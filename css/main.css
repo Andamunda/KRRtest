@@ -126,14 +126,63 @@ body.page-body--dark #cog-container div {
    ========================================================= */
 
 .summer-header {
-    height: 490px;
+    height: 565px;
     margin-top: -60px;
     padding-top: 47px;
-    background-image: url("../img/Workshop-6_3k.jpg");
+
+    position: relative;
+    isolation: isolate;
+
+    background-image:
+        linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.98) 0%,
+            rgba(0, 0, 0, 0.62) 35%,
+            rgba(0, 0, 0, 0) 80%
+        ),
+        url("../img/Workshop-6_3k.jpg");
+
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
 }
+
+
+.summer-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    background: linear-gradient(
+        to bottom,
+        rgba(20, 20, 20, 0.45) 0%,
+        rgba(20, 20, 20, 0.30) 25%,
+        rgba(20, 20, 20, 0.10) 50%,
+        transparent 75%
+    );
+
+    mask-image: linear-gradient(
+        to bottom,
+        black 0%,
+        black 25%,
+        transparent 75%
+    );
+
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        black 0%,
+        black 25%,
+        transparent 75%
+    );
+
+    pointer-events: none;
+}
+
+
 
 .summer-header__inner {
     display: flex;
@@ -153,16 +202,22 @@ body.page-body--dark #cog-container div {
 
 .summer-header__logo {
     display: block;
-    flex-basis: 260px;
-    width: 265px;
-    height: 120px;
+    position: relative;
+    z-index: 1;
+
+    flex-basis: 300px;
+    width: 305px;
+    height: 138px;
+
     margin: 30px;
     padding-top: 0;
-    background-image: url("../img/Logo-KRR-text-Big2.png");
+
+    background-image: url("../img/Logo-KRR-text-Black.png");
     background-repeat: no-repeat;
-    background-position: top;
-    background-size: cover;
-    filter: drop-shadow(3px 3px 2.5px #373737);
+    background-position: center;
+    background-size: contain;
+
+    filter: none;
 }
 
 
@@ -406,6 +461,7 @@ body.page-body--dark .contact-link--location:hover .contact-icon--location {
 }
 
 .contact-link__text {
+    white-space: nowrap;
     align-self: center;
     width: 260px;
     height: 30px;
@@ -429,6 +485,7 @@ body.page-body--dark .contact-link:hover .contact-link__text {
     width: 330px;
     height: 50px;
     margin: 0;
+    gap: 15px;
 }
 
 .social-link {
@@ -1262,5 +1319,122 @@ body.page-body--dark .social-link--instagram:hover {
 
     body.page-body--dark .desktop-language .language-button.active {
         border: 2px solid var(--color-accent);
+    }
+}
+
+/* =========================================================
+   14. PRICE CATEGORY NAVIGATION
+   ========================================================= */
+
+.price-tabs-wrapper {
+    display: block;
+    width: 100%;
+    flex: 0 0 100%;
+
+    margin: 10px 0 0;
+    padding: 0 10px;
+}
+
+.price-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    max-width: 900px;
+
+    margin: 10px auto 15px;
+    padding: 5px;
+
+    gap: 40px;
+
+  
+}
+
+.price-tab {
+    flex: 1 1 auto;
+    min-width: 100px;
+
+    padding: 10px 16px;
+
+    border: none;
+
+    background: transparent;
+    color: var(--color-muted);
+
+    font-family: "BebasNeue", sans-serif;
+    font-size: 24px;
+    font-weight: normal;
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.price-tab:hover {
+    color: var(--color-accent);
+    background-color: rgba(240, 90, 40, 0.07);
+}
+
+.price-tab.active {
+    color: var(--color-accent);
+}
+
+.price-tab:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* Dark mode */
+
+body.page-body--dark .price-tabs {
+    border-bottom-color: #555555;
+}
+
+body.page-body--dark .price-tab {
+    color: var(--color-muted);
+}
+
+body.page-body--dark .price-tab:hover {
+    color: var(--color-accent);
+    background-color: rgba(240, 90, 40, 0.12);
+}
+
+body.page-body--dark .price-tab.active {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+}
+
+/* Mobile */
+
+@media only screen and (max-width: 610px) {
+
+    .price-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%;
+        max-width: 100%;
+
+        overflow: visible;
+
+        margin: 5px auto 12px;
+        padding: 4px 5px 7px;
+
+        gap: 8px;
+    }
+
+    .price-tab {
+        flex: 0 1 auto;
+        min-width: auto;
+
+        padding: 9px 13px;
+        font-size: 19px;
+
+        white-space: nowrap;
     }
 }
